@@ -44,6 +44,14 @@ docker run --rm -v $(pwd)/transcripts:/in meeting-summarizer \
     meeting-summarizer summarize /in/my-recording.vtt --markdown
 ```
 
+## Example: production scenario
+
+**[examples/zoom_to_linear.py](examples/zoom_to_linear.py)** — End-to-end Zoom-to-Linear pipeline: transcript -> recap -> map each action item's owner to a Linear user ID via directory lookup -> create issues
+
+```bash
+python examples/zoom_to_linear.py
+```
+
 ## What it's for
 
 Every team has the same problem: someone takes notes (badly), the AI
