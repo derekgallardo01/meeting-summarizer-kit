@@ -1,0 +1,12 @@
+{
+  "repo": "meeting-summarizer-kit",
+  "title": "Meeting Summarizer Kit",
+  "tagline": "Parse meeting transcripts in 4 formats (text/VTT/SRT/Otter JSON), generate a 4-section recap with structured action items (owner + description + due). First-person trick maps 'I'll do X' to current speaker, not literal 'I'. Stub-by-default; one env var swaps to an LLM.",
+  "kicker": "Meetings · Transcripts · Structured Recaps · Capability Demo",
+  "features": [
+    {"label": "Formats", "value": "4 (text/VTT/SRT/Otter)"},
+    {"label": "Fixtures", "value": "4 bundled transcripts"},
+    {"label": "Tests + Evals", "value": "39 pytest + 9 golden"}
+  ],
+  "theme": {"primary": "#5b21b6", "accent": "#a78bfa"}
+}

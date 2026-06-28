@@ -1,0 +1,35 @@
+Alice: Okay, let's get started. The main topic today is the Q3 roadmap. Bob, do you want to walk us through what you've been thinking?
+
+Bob: Sure. So I think we should focus on three things: the new dashboard, the API rate limit work, and the integrations refresh. The dashboard is the biggest one.
+
+Alice: Agreed on the dashboard. That came up in three customer calls last week. Carol, what's your read on the API rate limit?
+
+Carol: It's a real issue but not urgent. We're seeing about 12 cases a month. I'd defer it to Q4 unless something changes.
+
+Alice: Okay, let's go with that. So for Q3 we're committed to the dashboard and the integrations refresh, and we're deferring the rate limit work to Q4.
+
+Bob: Sounds right. I'll draft the dashboard spec by Friday and circulate it for review.
+
+Alice: Great. Carol, can you set up a customer panel for the integrations refresh by next Wednesday?
+
+Carol: Yes, will do. I'll reach out to the top five accounts.
+
+Alice: Perfect. One more thing - what should we do about the feedback form on the help page? It's been broken for two weeks.
+
+Bob: I thought that was on the support team's plate?
+
+Alice: I don't think so. Let me check with them and circle back.
+
+Carol: Question - are we shipping the dashboard on iOS too, or just web for Q3?
+
+Bob: Good question. I think web only for Q3 but we should confirm with mobile.
+
+Alice: Yeah, that's open. I'll loop in mobile and get an answer by end of week.
+
+Carol: Okay. Also, are we still on track for the October launch? I keep hearing different dates.
+
+Alice: We're on track for late October. I'll send the updated launch dates to the team tomorrow.
+
+Bob: Sounds good. Anything else?
+
+Alice: No, I think we're good. Thanks everyone.

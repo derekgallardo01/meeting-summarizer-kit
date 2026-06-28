@@ -1,0 +1,74 @@
+{
+  "meeting_id": "demo-2026-06-28-engineering-standup",
+  "title": "Engineering standup",
+  "date": "2026-06-28",
+  "duration_seconds": 720,
+  "segments": [
+    {
+      "speaker": "Maya",
+      "text": "Good morning everyone. Let's go around. I'm still working on the payment retry logic. Hit a snag with idempotency keys yesterday but I think I have a path now.",
+      "start": 0.0,
+      "end": 18.5
+    },
+    {
+      "speaker": "Diego",
+      "text": "I finished the database migration tests. All green. We can deploy whenever the team is ready. Should we do it this afternoon?",
+      "start": 18.5,
+      "end": 32.0
+    },
+    {
+      "speaker": "Maya",
+      "text": "Let's deploy after lunch. Diego, can you put together a short deploy plan and share it in Slack by noon?",
+      "start": 32.0,
+      "end": 42.0
+    },
+    {
+      "speaker": "Diego",
+      "text": "Will do. I'll write up the rollback steps too in case we need them.",
+      "start": 42.0,
+      "end": 50.0
+    },
+    {
+      "speaker": "Priya",
+      "text": "I'm blocked on the analytics dashboard. The data pipeline keeps timing out on the Q2 backfill. Has anyone seen this before?",
+      "start": 50.0,
+      "end": 65.0
+    },
+    {
+      "speaker": "Maya",
+      "text": "I haven't, but Leo dealt with something similar last quarter. Priya, can you ping Leo and see if his fix applies here? I'll also follow up with him tomorrow if you don't hear back today.",
+      "start": 65.0,
+      "end": 85.0
+    },
+    {
+      "speaker": "Priya",
+      "text": "Sounds good. What about the staging environment refresh? That was supposed to happen last week.",
+      "start": 85.0,
+      "end": 96.0
+    },
+    {
+      "speaker": "Diego",
+      "text": "That got pushed because of the migration work. Let's agree to do it next Monday. I'll book the window.",
+      "start": 96.0,
+      "end": 108.0
+    },
+    {
+      "speaker": "Maya",
+      "text": "Agreed on Monday. Diego, you'll send the calendar invite by today? I want to make sure on-call knows.",
+      "start": 108.0,
+      "end": 122.0
+    },
+    {
+      "speaker": "Diego",
+      "text": "Yes, will send the invite by end of day.",
+      "start": 122.0,
+      "end": 128.0
+    },
+    {
+      "speaker": "Maya",
+      "text": "Anything else? Okay, see everyone tomorrow.",
+      "start": 128.0,
+      "end": 135.0
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "description": "Recap-quality eval cases. Each case asserts the rendered markdown recap contains required phrases (typically: section headers + at least one substantive item per section that should have one).",
+  "cases": [
+    {
+      "id": "product-sync-has-all-sections",
+      "fixture": "01-product-sync.txt",
+      "rubric": {"contains_all": ["## Summary", "## Decisions", "## Action items", "## Open questions"]}
+    },
+    {
+      "id": "product-sync-mentions-dashboard-decision",
+      "fixture": "01-product-sync.txt",
+      "rubric": {"contains_any": ["dashboard", "Dashboard"]}
+    },
+    {
+      "id": "zoom-recording-mentions-mfa-or-conditional-access",
+      "fixture": "02-zoom-recording.vtt",
+      "rubric": {"contains_any": ["MFA", "conditional access", "Conditional Access"]}
+    },
+    {
+      "id": "customer-call-has-action-item-section",
+      "fixture": "03-customer-call.srt",
+      "rubric": {"contains_all": ["## Action items"]}
+    },
+    {
+      "id": "otter-standup-mentions-deploy-or-migration",
+      "fixture": "04-otter-transcript.json",
+      "rubric": {"contains_any": ["deploy", "migration", "Diego", "Maya"]}
+    }
+  ]
+}

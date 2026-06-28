@@ -1,0 +1,27 @@
+[project]
+name = "meeting-summarizer"
+version = "1.0.0"
+description = "Parse meeting transcripts (plain text / VTT / SRT / Otter-style JSON), generate a four-section recap (Summary / Decisions / Action items / Open questions), extract structured action items with owners + due dates. Stub-by-default so the kit runs anywhere; one env var swaps to an LLM."
+authors = [{name = "Derek Gallardo", email = "derekgallardo01@gmail.com"}]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+llm = [
+    "anthropic>=0.40.0",
+]
+
+[project.scripts]
+meeting-summarizer = "meeting_summarizer.cli:main"
+
+[project.urls]
+Repository = "https://github.com/derekgallardo01/meeting-summarizer-kit"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

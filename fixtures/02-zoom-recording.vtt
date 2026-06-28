@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.500
+<v Sarah Chen>Welcome everyone. Let's kick off the security review.
+
+00:00:05.500 --> 00:00:18.200
+<v Sarah Chen>The main item today is the Conditional Access audit. We agreed last week that we need to enforce MFA on every admin role. David, where are we on that?
+
+00:00:18.200 --> 00:00:32.800
+<v David Park>Good news - I finished the audit yesterday. Three admin accounts were still on report-only. I'll move them to enforce by end of week.
+
+00:00:32.800 --> 00:00:42.000
+<v Sarah Chen>Perfect. We also decided to revoke standing access for the three contractors. Who's owning that?
+
+00:00:42.000 --> 00:00:54.500
+<v David Park>I'll handle it. I'll send the offboarding tickets by tomorrow and follow up with HR.
+
+00:00:54.500 --> 00:01:08.000
+<v Maria Rodriguez>Quick question - what's our policy on service accounts? I keep seeing new ones created without justification.
+
+00:01:08.000 --> 00:01:22.500
+<v Sarah Chen>Good catch. That's an open question. We don't have a formal policy yet. Maria, can you draft a one-page service account policy by next Friday?
+
+00:01:22.500 --> 00:01:28.000
+<v Maria Rodriguez>Yes, will do. Should I circulate to legal first or to you?
+
+00:01:28.000 --> 00:01:35.000
+<v Sarah Chen>To me first, then we'll review together before sending to legal.
+
+00:01:35.000 --> 00:01:42.500
+<v Maria Rodriguez>Got it. Also, are we keeping the same incident response runbook for credential compromise?
+
+00:01:42.500 --> 00:01:48.000
+<v Sarah Chen>Yes, that's still current. No changes needed there.
+
+00:01:48.000 --> 00:01:54.000
+<v David Park>Anything else?
+
+00:01:54.000 --> 00:01:58.000
+<v Sarah Chen>That's it. Thanks everyone.

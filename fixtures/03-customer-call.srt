@@ -1,0 +1,47 @@
+1
+00:00:00,000 --> 00:00:08,500
+Account Manager: Hi Jordan, thanks for taking the time. How has the rollout been going for your team?
+
+2
+00:00:08,500 --> 00:00:22,000
+Jordan Park: Mostly good. We're seeing strong adoption in marketing and sales but engineering is stuck. They have specific integration needs we haven't covered yet.
+
+3
+00:00:22,000 --> 00:00:31,500
+Account Manager: That's good context. What's the engineering team's biggest blocker right now?
+
+4
+00:00:31,500 --> 00:00:42,000
+Jordan Park: They need the GitHub integration to work with our self-hosted instance. The cloud version works but we can't use it for compliance reasons.
+
+5
+00:00:42,000 --> 00:00:55,000
+Account Manager: Understood. I'll loop in our integrations team and schedule a technical call by next Tuesday. We've done self-hosted GitHub before so it should be doable.
+
+6
+00:00:55,000 --> 00:01:08,500
+Jordan Park: That would be great. Also, can you send me the pricing for adding another 20 seats? We want to expand to data engineering next quarter.
+
+7
+00:01:08,500 --> 00:01:18,000
+Account Manager: Yes, I'll send the pricing tomorrow morning. Will it be the same volume tier or a different one?
+
+8
+00:01:18,000 --> 00:01:24,500
+Jordan Park: Different - we'd cross into the 100-seat tier with this expansion.
+
+9
+00:01:24,500 --> 00:01:32,000
+Account Manager: Got it. I'll include both annual and monthly options. Anything else on your mind?
+
+10
+00:01:32,000 --> 00:01:40,000
+Jordan Park: One question - are we still getting custom training for the engineering team as part of the contract?
+
+11
+00:01:40,000 --> 00:01:50,000
+Account Manager: Yes, that's included. Once we figure out the GitHub piece I'll schedule the training session.
+
+12
+00:01:50,000 --> 00:01:55,000
+Jordan Park: Perfect. Thanks for everything.

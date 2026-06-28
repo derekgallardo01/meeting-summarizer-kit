@@ -1,0 +1,194 @@
+name: Deploy live demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package
+        run: pip install --quiet -e .
+
+      - name: Generate the static demo report
+        run: |
+          mkdir -p site
+          python - <<'PY'
+          import html
+          from dataclasses import asdict
+          from pathlib import Path
+          import sys
+          sys.path.insert(0, "src")
+          from meeting_summarizer.summarizer import Summarizer
+          from meeting_summarizer.transcript import parse_file
+
+          FIXTURES = Path("fixtures")
+          cards = []
+          for fixture in sorted(FIXTURES.iterdir()):
+              if fixture.suffix.lower() not in (".txt", ".vtt", ".srt", ".json"):
+                  continue
+              transcript = parse_file(fixture)
+              recap = Summarizer().summarize(transcript)
+              cards.append({"file": fixture.name, "transcript": transcript, "recap": recap})
+
+          def render_card(c):
+              t = c["transcript"]
+              r = c["recap"]
+
+              decisions_html = "".join(
+                  f"<li>{html.escape(d)}</li>" for d in r.decisions
+              ) or "<li class='empty'>None recorded.</li>"
+
+              action_html = ""
+              for a in r.action_items:
+                  due = f"<span class='due'>by {html.escape(a.due)}</span>" if a.due else ""
+                  action_html += f"<li><span class='owner'>{html.escape(a.owner)}</span> {html.escape(a.description)} {due}</li>"
+              if not action_html:
+                  action_html = "<li class='empty'>None recorded.</li>"
+
+              questions_html = "".join(
+                  f"<li>{html.escape(q)}</li>" for q in r.open_questions
+              ) or "<li class='empty'>None recorded.</li>"
+
+              return f"""
+                <div class="card">
+                  <div class="card-header">
+                    <span class="kicker">{html.escape(t.source_format)}</span>
+                    <h2>{html.escape(c['file'])}</h2>
+                  </div>
+                  <div class="meta">
+                    <span class="pill">{len(t.segments)} segments</span>
+                    <span class="pill">{len(t.speakers())} speakers</span>
+                    <span class="pill">{int(t.duration_seconds())}s</span>
+                  </div>
+                  <div class="kicker">Summary</div>
+                  <p class="summary">{html.escape(r.summary)}</p>
+                  <div class="kicker">Decisions ({len(r.decisions)})</div>
+                  <ul>{decisions_html}</ul>
+                  <div class="kicker">Action items ({len(r.action_items)})</div>
+                  <ul class="actions">{action_html}</ul>
+                  <div class="kicker">Open questions ({len(r.open_questions)})</div>
+                  <ul>{questions_html}</ul>
+                </div>
+              """
+
+          page = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Meeting summarizer kit - live demo</title>
+            <style>
+              :root {{
+                --primary: #5b21b6; --accent: #a78bfa;
+                --bg: #f5f3ff; --border: #ddd6fe;
+                --ink: #1e1b4b; --muted: #6b7280;
+              }}
+              * {{ box-sizing: border-box; }}
+              body {{
+                margin: 0; font-family: 'Segoe UI', system-ui, sans-serif;
+                background: var(--bg); color: var(--ink); line-height: 1.5;
+              }}
+              .hero {{
+                background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+                color: white; padding: 50px 24px 60px;
+              }}
+              .hero-inner {{ max-width: 960px; margin: 0 auto; }}
+              .hero .kicker {{ font-size: 13px; letter-spacing: 2px; opacity: .75; text-transform: uppercase; }}
+              .hero h1 {{ font-size: 38px; margin: 10px 0 14px; line-height: 1.1; }}
+              .hero p {{ font-size: 17px; margin: 0; opacity: .92; max-width: 760px; }}
+              .container {{ max-width: 960px; margin: -30px auto 60px; padding: 0 24px; }}
+              .card {{
+                background: white; border: 1px solid var(--border); border-radius: 12px;
+                padding: 22px 26px; margin: 16px 0;
+                box-shadow: 0 1px 3px rgba(91, 33, 182, .08);
+              }}
+              .card-header {{ display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }}
+              .card h2 {{ margin: 4px 0; font-size: 18px; font-family: Consolas, monospace; }}
+              .kicker {{
+                font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+                color: var(--accent); font-weight: 700; margin: 14px 0 6px;
+              }}
+              .meta {{ margin: 0 0 12px; }}
+              .pill {{
+                display: inline-block; background: #ede9fe; color: var(--primary);
+                padding: 3px 10px; border-radius: 12px; font-size: 12px;
+                font-weight: 600; margin-right: 6px;
+              }}
+              .summary {{ font-size: 14px; color: var(--ink); margin: 4px 0 8px; }}
+              ul {{ padding-left: 20px; margin: 4px 0; }}
+              li {{ font-size: 13px; color: var(--ink); margin-bottom: 4px; }}
+              li.empty {{ color: var(--muted); font-style: italic; list-style: none; padding-left: 0; }}
+              .actions li {{ list-style: none; padding-left: 0; }}
+              .actions .owner {{
+                background: #ede9fe; color: var(--primary); padding: 2px 8px;
+                border-radius: 4px; font-weight: 700; font-size: 12px;
+                margin-right: 6px;
+              }}
+              .actions .due {{
+                color: #b45309; font-size: 12px; font-weight: 600;
+              }}
+              .footer {{
+                margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+                color: var(--muted); font-size: 13px; text-align: center;
+              }}
+              .footer code {{ background: #ede9fe; padding: 2px 6px; border-radius: 4px; }}
+              a {{ color: var(--accent); }}
+            </style>
+          </head>
+          <body>
+            <div class="hero">
+              <div class="hero-inner">
+                <div class="kicker">Parse &middot; Summarize &middot; Extract</div>
+                <h1>Meeting summarizer kit - live demo</h1>
+                <p>Four bundled transcripts in four different formats (plain
+                text, WebVTT, SubRip, Otter JSON). Each one parsed,
+                summarized into a four-section recap, with structured action
+                items extracted (owner + description + due date). Default
+                backend is a deterministic template summarizer - one env var
+                swaps to an LLM.</p>
+              </div>
+            </div>
+
+            <div class="container">
+              {''.join(render_card(c) for c in cards)}
+
+              <div class="footer">
+                Regenerated on every push from the template backend.
+                Install: <code>pip install -e .</code> then <code>meeting-summarizer demo</code>.<br>
+                Source: <a href="https://github.com/derekgallardo01/meeting-summarizer-kit">github.com/derekgallardo01/meeting-summarizer-kit</a>
+              </div>
+            </div>
+          </body>
+          </html>
+          """
+          with open("site/index.html", "w", encoding="utf-8") as fh:
+              fh.write(page)
+          print("wrote site/index.html")
+          PY
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,4 @@
+  01-product-sync.txt                  format=text          18 segments  1 decisions  5 actions  1 questions
+  02-zoom-recording.vtt                format=vtt           13 segments  2 decisions  4 actions  3 questions
+  03-customer-call.srt                 format=srt           12 segments  0 decisions  4 actions  2 questions
+  04-otter-transcript.json             format=otter_json    11 segments  1 decisions  6 actions  2 questions

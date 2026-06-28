@@ -1,0 +1,39 @@
+{
+  "description": "Action-item extraction accuracy. Each case lists the expected action items as (owner, description_keyword) pairs. The eval passes a case when every expected pair is present in the extracted action items - tolerating minor description variance via substring match.",
+  "cases": [
+    {
+      "id": "product-sync-extracts-five-items",
+      "fixture": "01-product-sync.txt",
+      "expected_items": [
+        {"owner": "Bob",   "description_contains": "draft the dashboard spec"},
+        {"owner": "Carol", "description_contains": "customer panel"},
+        {"owner": "Carol", "description_contains": "reach out"},
+        {"owner": "Alice", "description_contains": "loop in mobile"},
+        {"owner": "Alice", "description_contains": "send the updated launch dates"}
+      ]
+    },
+    {
+      "id": "zoom-recording-davids-actions",
+      "fixture": "02-zoom-recording.vtt",
+      "expected_items": [
+        {"owner": "David Park", "description_contains": "move"},
+        {"owner": "David Park", "description_contains": "offboarding"}
+      ]
+    },
+    {
+      "id": "customer-call-account-manager-actions",
+      "fixture": "03-customer-call.srt",
+      "expected_items": [
+        {"owner": "Account Manager", "description_contains": "loop in"}
+      ]
+    },
+    {
+      "id": "otter-standup-diego-actions",
+      "fixture": "04-otter-transcript.json",
+      "expected_items": [
+        {"owner": "Diego", "description_contains": "deploy plan"},
+        {"owner": "Diego", "description_contains": "send"}
+      ]
+    }
+  ]
+}
